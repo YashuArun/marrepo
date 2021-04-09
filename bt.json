@@ -1,0 +1,37 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Basic template",
+	"Parameters": {
+		"UserKeys": {
+			"Type": "String",
+			"Description": "SSH PEM key name."
+		},
+		"AmiID": {
+			"Type": "String",
+			"Description": "AMI for the talend instances."
+		},
+		"SubnetID": {
+            "Description": "ID of the public subnet working that you want to provision the first bastion into (e.g., subnet-a0246dcd)",
+            "Type": "AWS::EC2::Subnet::Id"
+        }
+	},
+	"Resources": {
+		"cbServer": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"ImageId": { "Ref": "AmiID" },
+				"InstanceType": "t2.micro",
+				"SecurityGroupIds": ["sg-05cd42c02a2b478f2"],
+				"SubnetId": { "Ref": "SubnetID" },
+				"KeyName": { "Ref": "UserKeys" },
+				"UserData": { "Fn::Base64" : { "Fn::Join" : ["", [
+						"#!/bin/bash \n",
+						"yum install httpd -y \n",
+						"systemctl start httpd \n",
+						"echo \"This is Webpage\" > /var/www/index.html"
+						]]}
+				}
+			}
+		}
+	}
+}
