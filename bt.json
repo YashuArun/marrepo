@@ -28,7 +28,7 @@
 						"#!/bin/bash \n",
 						"yum install httpd -y \n",
 						"systemctl start httpd \n",
-						"echo \"This is Webpage\" "
+						"echo \"This is Webpage\""
 						]]}
 				}
 			}
