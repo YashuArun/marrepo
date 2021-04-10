@@ -8,7 +8,7 @@
 		},
 		"AmiID": {
 			"Type": "String",
-			"Description": "AMI for the instances."
+			"Description": "AMI for instances."
 		},
 		"SubnetID": {
             "Description": "ID of the public subnet working that you want to provision the first bastion into (e.g., subnet-a0246dcd)",
